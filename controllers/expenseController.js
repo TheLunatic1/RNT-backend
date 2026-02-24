@@ -61,3 +61,40 @@ exports.deleteExpense = async (req, res) => {
     res.status(500).json({ msg: 'Server error' });
   }
 };
+
+
+
+// @desc    Update expense
+// @route   PUT /api/expenses/:id
+exports.updateExpense = async (req, res) => {
+  const { amount, description, category, date } = req.body;
+
+  try {
+    let expense = await Expense.findById(req.params.id);
+
+    if (!expense) {
+      return res.status(404).json({ msg: 'Expense not found' });
+    }
+
+    // Check ownership
+    if (expense.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: 'Not authorized' });
+    }
+
+    // Update fields if provided
+    if (amount !== undefined) expense.amount = amount;
+    if (description) expense.description = description;
+    if (category) expense.category = category;
+    if (date) expense.date = date;
+
+    expense = await expense.save();
+
+    res.json(expense);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind === 'ObjectId') {
+      return res.status(404).json({ msg: 'Expense not found' });
+    }
+    res.status(500).json({ msg: 'Server error' });
+  }
+};

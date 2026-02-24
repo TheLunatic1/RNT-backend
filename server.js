@@ -16,6 +16,8 @@ app.get('/', (req, res) => res.send('Expense Tracker API running'));
 
 app.use('/api/auth', require('./routes/auth'));
 
+app.use('/api/categories', require('./routes/categories'));
+
 
 // ... existing imports and code ...
 
