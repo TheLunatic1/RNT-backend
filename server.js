@@ -16,6 +16,17 @@ app.get('/', (req, res) => res.send('Expense Tracker API running'));
 
 app.use('/api/auth', require('./routes/auth'));
 
+
+// ... existing imports and code ...
+
+app.use('/api/expenses', require('./routes/expenses'));
+
+// Global error handler (already there or add if missing)
+app.use((err, req, res, next) => {
+  console.error('Global error:', err.message);
+  res.status(500).json({ msg: 'Internal Server Error' });
+});
+
 // Global error handler (catches unhandled errors)
 app.use((err, req, res, next) => {
   console.error('Global error:', err.message);
