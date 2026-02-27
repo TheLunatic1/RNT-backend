@@ -32,7 +32,6 @@ yarn-error.*
 
 # local env files
 .env*.local
-Readme.md
 api/index.js
 vercel.json
 
