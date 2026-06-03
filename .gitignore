@@ -1,5 +1,6 @@
 # Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
+.env
 # dependencies
 node_modules/
 
@@ -41,3 +42,6 @@ vercel.json
 # generated native folders
 /ios
 /android
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat
